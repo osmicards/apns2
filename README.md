@@ -1,3 +1,16 @@
+## This is a fork of the repository [APNS/2](https://github.com/sideshow/apns2)
+
+### Added support for encrypted PKCS8 private keys and better handling of pkcs12 certificates bundle
+
+- Added support for [pkcs8](https://github.com/youmark/pkcs8)
+- Added support for [pkcs12](https://pkg.go.dev/software.sslmate.com/src/go-pkcs12#section-sourcefiles)
+
+To use updated package just replace `github.com/sideshow/apns2` with `github.com/osmicards/apns2`
+
+Everything else stays as per original repository [APNS/2](https://github.com/sideshow/apns2)
+
+***
+
 # APNS/2
 
 APNS/2 is a go package designed for simple, flexible and fast Apple Push Notifications on iOS, OSX and Safari using the new HTTP/2 Push provider API.

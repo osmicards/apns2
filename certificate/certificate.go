@@ -11,7 +11,8 @@ import (
 	"os"
 	"strings"
 
-	"golang.org/x/crypto/pkcs12"
+	"github.com/youmark/pkcs8"
+	"software.sslmate.com/src/go-pkcs12"
 )
 
 // Possible errors when parsing a certificate.
@@ -107,16 +108,16 @@ func FromPemBytes(bytes []byte, password string) (tls.Certificate, error) {
 }
 
 func unencryptPrivateKey(block *pem.Block, password string) (crypto.PrivateKey, error) {
-	return parsePrivateKey(block.Bytes)
+	return parsePrivateKey(block.Bytes, password)
 }
 
-func parsePrivateKey(bytes []byte) (crypto.PrivateKey, error) {
+func parsePrivateKey(bytes []byte, password string) (crypto.PrivateKey, error) {
 	var key crypto.PrivateKey
 	key, err := x509.ParsePKCS1PrivateKey(bytes)
 	if err == nil {
 		return key, nil
 	}
-	key, err = x509.ParsePKCS8PrivateKey(bytes)
+	key, err = pkcs8.ParsePKCS8PrivateKey(bytes, []byte(password))
 	if err == nil {
 		return key, nil
 	}
